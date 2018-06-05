@@ -17,14 +17,14 @@ class SegmentDisplay_CD4511B {
     SegmentDisplay_CD4511B(int a, int b, int c, int d, int latchPins, ...);
 
     // Unexpected results occur if the number of digits is greater than the number of chips/displays
-    void displayNumber(int number);
+    void showNumber(int number);
 
   private:
     void setDisplayControlPins(int a, int b, int c, int d);
     void setLatchControlPins(int count, va_list pins);
     void enablePinsForPutput();
-    void displayNumber(int number, int digits, int currentDigit);
-    void displayNumberUsingLedDriverPins(int number, int pins[4], int latchingPin);
+    void showNumber(int number, int digits, int currentDigit);
+    void showNumberUsingLedDriverPins(int number, int pins[4], int latchingPin);
 
 };
 

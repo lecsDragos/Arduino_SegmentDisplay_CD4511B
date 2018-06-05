@@ -19,7 +19,7 @@ void setup() {}
 void loop() {
   if (number > 20) { number = 0; }
   
-  displayDriver.displayNumber(number);
+  displayDriver.showNumber(number);
   
   number++;
   

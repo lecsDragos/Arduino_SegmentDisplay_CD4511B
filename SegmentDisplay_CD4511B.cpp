@@ -58,23 +58,23 @@ void SegmentDisplay_CD4511B::enablePinsForPutput() {
 }
 
 // Display logic
-void SegmentDisplay_CD4511B::displayNumber(int number) {
-  displayNumber(number, digits, 0);
+void SegmentDisplay_CD4511B::showNumber(int number) {
+  showNumber(number, digits, 0);
 }
 
-void SegmentDisplay_CD4511B::displayNumber(int number, int digits, int currentDigit) {  
+void SegmentDisplay_CD4511B::showNumber(int number, int digits, int currentDigit) {
     int divider = pow(10, digits - 1);
     int numberToDisplay = number / divider;
    
-    displayNumberUsingLedDriverPins(numberToDisplay, displayPins, latchPins[currentDigit]);
+    showNumberUsingLedDriverPins(numberToDisplay, displayPins, latchPins[currentDigit]);
 
     if (digits > 1) {
       int rest = number % divider;
-      displayNumber(rest, digits - 1, currentDigit + 1);
+      showNumber(rest, digits - 1, currentDigit + 1);
     }
 }
 
-void SegmentDisplay_CD4511B::displayNumberUsingLedDriverPins(int number, int pins[4], int latchingPin) {
+void SegmentDisplay_CD4511B::showNumberUsingLedDriverPins(int number, int pins[4], int latchingPin) {
   digitalWrite(latchingPin, LOW);
 
   Serial.println(latchingPin);
