@@ -4,7 +4,7 @@
 
 int *latchPins;
 int displayPins[4];
-int maxDigits; // zero based; 
+int digits; 
 
 // Public setup methods
 void setupDisplayPins(int a, int b, int c, int d) {
@@ -18,7 +18,7 @@ void setupLatchPins(int pins, ...) {
   va_list valist;
   va_start(valist, pins);
   latchPins = (int *) malloc(pins * sizeof(int));
-  maxDigits = pins - 1;
+  digits = pins;
   for (int index = 0; index < pins; index++) {
     latchPins[index] = va_arg(valist, int);
     
@@ -32,6 +32,7 @@ void setup() {
   setupDisplayPins(6, 8, 7, 5);
   setupLatchPins(2, 9, 10);
   enablePinsForPutput();
+
 }
 
 void enablePinsForPutput() {
@@ -39,7 +40,7 @@ void enablePinsForPutput() {
     pinMode(displayPins[index], OUTPUT);
   }
 
-  for (int index = 0; index <= maxDigits; index++) {
+  for (int index = 0; index < digits; index++) {
     pinMode(latchPins[index], OUTPUT);
   }
 }
@@ -58,18 +59,19 @@ const int ledDriverInputTable[10][4] = {
   {1, 0, 0, 1}  // 9
 };
 
+
 // Display logic
 void displayNumber(int number) {
-  displayNumber(number, maxDigits, 0);
+  displayNumber(number, digits, 0);
 }
 
 void displayNumber(int number, int digits, int currentDigit) {  
-    int divider = pow(10, digits);
+    int divider = pow(10, digits - 1);
     int numberToDisplay = number / divider;
    
     displayNumberUsingLedDriverPins(numberToDisplay, displayPins, latchPins[currentDigit]);
 
-    if (digits > 0) {
+    if (digits > 1) {
       int rest = number % divider;
       displayNumber(rest, digits - 1, currentDigit + 1);
     }
