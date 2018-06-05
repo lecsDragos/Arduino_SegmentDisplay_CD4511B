@@ -1,1 +1,0 @@
-## Driving a seven segment displays using an arduino and the help of CD4511BE chips 
